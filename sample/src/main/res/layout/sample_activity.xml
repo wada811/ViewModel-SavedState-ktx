@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.wada811.viewmodelsavedstate.sample.SampleViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/activityCountLabel"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="Count in Activity: "
+            app:layout_constraintBottom_toTopOf="@id/viewModelCountLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/activityCountText"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/activityCountText"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintBottom_toTopOf="@id/viewModelCountLabel"
+            app:layout_constraintLeft_toRightOf="@id/activityCountLabel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/viewModelCountLabel"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="Count in ViewModel: "
+            app:layout_constraintBottom_toTopOf="@+id/savedStateCountLabel"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/viewModelCountText"
+            app:layout_constraintTop_toBottomOf="@+id/activityCountLabel"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/viewModelCountText"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="@{viewModel.viewModelCountText}"
+            app:layout_constraintBottom_toTopOf="@id/savedStateCountLabel"
+            app:layout_constraintLeft_toRightOf="@id/viewModelCountLabel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activityCountText"
+            tools:ignore="RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/savedStateCountLabel"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="Count in SavedState: "
+            app:layout_constraintBottom_toTopOf="@id/countUpButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/savedStateCountText"
+            app:layout_constraintTop_toBottomOf="@+id/viewModelCountLabel"
+            tools:ignore="HardcodedText,RtlHardcoded" />
+
+        <TextView
+            android:id="@+id/savedStateCountText"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="@{viewModel.savedStateCountText}"
+            app:layout_constraintBottom_toTopOf="@id/countUpButton"
+            app:layout_constraintLeft_toRightOf="@id/savedStateCountLabel"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/viewModelCountText"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:id="@+id/countUpButton"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="Count up"
+            app:layout_constraintBottom_toTopOf="@id/logText"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/savedStateCountLabel"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/logText"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="@{viewModel.log}"
+            app:layout_constraintBottom_toTopOf="@id/rotateButton"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/countUpButton"
+            tools:ignore="RtlHardcoded" />
+
+        <Button
+            android:id="@+id/rotateButton"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="Rotate"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/restart_button"
+            app:layout_constraintTop_toBottomOf="@id/logText"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/restart_button"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:text="Restart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/rotateButton"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logText"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
