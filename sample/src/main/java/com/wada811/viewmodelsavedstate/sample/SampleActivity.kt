@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.wada811.databinding.dataBinding
+import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue
 import com.wada811.viewmodelsavedstate.sample.databinding.SampleActivityBinding
 
 class SampleActivity : AppCompatActivity() {
@@ -21,8 +22,21 @@ class SampleActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.activityCountText.text = "$count"
         binding.countUpButton.setOnClickListener {
-            binding.activityCountText.text = "${++count}"
+            count += viewModel.countUpValueEnumLiveData.value?.count ?: 0
+            binding.activityCountText.text = "$count"
             viewModel.countUp()
+        }
+        binding.plusOneButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.plusTenButton.isChecked = false
+            }
+            viewModel.countUpValueIntLiveData.value = if (isChecked) CountUpValue.ONE.ordinal else null
+        }
+        binding.plusTenButton.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.plusOneButton.isChecked = false
+            }
+            viewModel.countUpValueEnumLiveData.value = if (isChecked) CountUpValue.TEN else null
         }
         binding.rotateButton.setOnClickListener {
             viewModel.appendLog("Activity::rotate")
