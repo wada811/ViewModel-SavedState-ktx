@@ -27,10 +27,7 @@ class MainActivity : AppCompatActivity() {
             }, TimeUnit.SECONDS.toMillis(1))
             return
         }
-        startActivity(Intent(this, SampleActivity::class.java).also {
-            it.putExtra(SampleViewModel::savedStateCount.name, 0)
-            it.putExtra(SampleViewModel::log.name, "Log:")
-        })
+        startActivity(SampleActivity.createIntent(this))
         finish()
         return
     }

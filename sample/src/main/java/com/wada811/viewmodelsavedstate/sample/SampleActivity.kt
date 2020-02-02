@@ -1,5 +1,7 @@
 package com.wada811.viewmodelsavedstate.sample
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.provider.Settings
@@ -10,9 +12,8 @@ import com.wada811.databinding.dataBinding
 import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue
 import com.wada811.viewmodelsavedstate.sample.databinding.SampleActivityBinding
 
-class SampleActivity : AppCompatActivity() {
-
-    private val binding: SampleActivityBinding by dataBinding(R.layout.sample_activity)
+class SampleActivity : AppCompatActivity(R.layout.sample_activity) {
+    private val binding: SampleActivityBinding by dataBinding()
     private val viewModel: SampleViewModel by viewModels()
     private var count = 0
 
@@ -30,7 +31,7 @@ class SampleActivity : AppCompatActivity() {
             if (isChecked) {
                 binding.plusTenButton.isChecked = false
             }
-            viewModel.countUpValueIntLiveData.value = if (isChecked) CountUpValue.ONE.ordinal else null
+            viewModel.countUpValueEnumLiveData.value = if (isChecked) CountUpValue.ONE else null
         }
         binding.plusTenButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -73,6 +74,14 @@ class SampleActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.appendLog("Activity::onDestroy")
+    }
+
+    companion object {
+        @JvmStatic
+        fun createIntent(context: Context): Intent = Intent(context, SampleActivity::class.java).also {
+            it.putExtra(SampleViewModel::savedStateCount.name, 0)
+            it.putExtra(SampleViewModel::log.name, "Log:")
+        }
     }
 }
 

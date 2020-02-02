@@ -1,23 +1,22 @@
-package com.wada811.viewmodelsavedstate.delegatedproperty
+package com.wada811.viewmodelsavedstate.property
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.wada811.viewmodelsavedstate.ISavedStateViewModel
+import com.wada811.viewmodelsavedstate.SavedStateHandler
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 internal class SavedStateLiveDataSerializableProperty<T, R>(
     private val savedStateHandle: SavedStateHandle,
-    private val key: String?,
     private val deserialize: (T) -> R,
     private val serialize: (R) -> T
-) : ReadOnlyProperty<ISavedStateViewModel, MutableLiveData<R>> {
+) : ReadOnlyProperty<SavedStateHandler, MutableLiveData<R>> {
     private var savedStateLiveData: MutableLiveData<R>? = null
 
-    override fun getValue(thisRef: ISavedStateViewModel, property: KProperty<*>): MutableLiveData<R> {
+    override fun getValue(thisRef: SavedStateHandler, property: KProperty<*>): MutableLiveData<R> {
         if (savedStateLiveData == null) {
-            savedStateLiveData = SavedStateSerializableLiveData(savedStateHandle, key ?: property.name, deserialize, serialize)
+            savedStateLiveData = SavedStateSerializableLiveData(savedStateHandle, property.name, deserialize, serialize)
         }
         return savedStateLiveData!!
     }

@@ -18,23 +18,22 @@ class SampleViewModel(savedStateHandle: SavedStateHandle) : SavedStateViewModel(
             liveData.value = "$count"
         }
     }
-    val countUpValueIntLiveData: MutableLiveData<Int?> by savedStateLiveData(this::countUpValueEnumLiveData.name)
-    val countUpValueEnumLiveData: MutableLiveData<CountUpValue?> by savedStateLiveData()
-    val savedStateCount: MutableLiveData<Int> by savedStateLiveData()
+    val countUpValueEnumLiveData: MutableLiveData<CountUpValue?> by savedStateHandle.liveData()
+    val savedStateCount: MutableLiveData<Int> by savedStateHandle.liveData()
     var savedStateCountText: LiveData<String> = MediatorLiveData<String>().also { liveData ->
         liveData.addSource(savedStateCount) { count ->
             liveData.value = "$count"
         }
     }
 
-    val log: MutableLiveData<String> by savedStateLiveData()
+    val log: MutableLiveData<String> by savedStateHandle.liveData()
 
     init {
         appendLog("ViewModel::init")
     }
 
     fun countUp() {
-        viewModelCount.value = viewModelCount.value?.plus(CountUpValue.values().firstOrNull { it.ordinal == countUpValueIntLiveData.value }?.count ?: 0)
+        viewModelCount.value = viewModelCount.value?.plus(countUpValueEnumLiveData.value?.count ?: 0)
         savedStateCount.value = savedStateCount.value?.plus(countUpValueEnumLiveData.value?.count ?: 0)
     }
 
