@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.wada811.databinding.dataBinding
+import com.wada811.viewmodelsavedstate.extension.putExtra
 import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue
 import com.wada811.viewmodelsavedstate.sample.databinding.SampleActivityBinding
 
@@ -79,7 +80,7 @@ class SampleActivity : AppCompatActivity(R.layout.sample_activity) {
     companion object {
         @JvmStatic
         fun createIntent(context: Context): Intent = Intent(context, SampleActivity::class.java).also {
-            it.putExtra(SampleViewModel::savedStateCount.name, 0)
+            it.putExtra(SampleViewModel::savedStateCount, 0)
         }
     }
 }
