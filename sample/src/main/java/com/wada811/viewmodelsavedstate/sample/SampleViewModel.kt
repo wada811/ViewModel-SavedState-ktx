@@ -1,12 +1,13 @@
 package com.wada811.viewmodelsavedstate.sample
 
+import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.wada811.viewmodelsavedstate.SavedStateViewModel
+import com.wada811.viewmodelsavedstate.SavedStateAndroidViewModel
 
-class SampleViewModel(savedStateHandle: SavedStateHandle) : SavedStateViewModel(savedStateHandle) {
+class SampleViewModel(application: Application, savedStateHandle: SavedStateHandle) : SavedStateAndroidViewModel(application, savedStateHandle) {
     enum class CountUpValue(val count: Int) {
         ONE(1),
         TEN(10)
@@ -26,7 +27,7 @@ class SampleViewModel(savedStateHandle: SavedStateHandle) : SavedStateViewModel(
         }
     }
 
-    val log: MutableLiveData<String> by savedStateHandle.liveData()
+    val log: MutableLiveData<String> by savedStateHandle.liveData("Log:")
 
     init {
         appendLog("ViewModel::init")

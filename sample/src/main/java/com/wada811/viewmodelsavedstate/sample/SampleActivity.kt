@@ -80,7 +80,6 @@ class SampleActivity : AppCompatActivity(R.layout.sample_activity) {
         @JvmStatic
         fun createIntent(context: Context): Intent = Intent(context, SampleActivity::class.java).also {
             it.putExtra(SampleViewModel::savedStateCount.name, 0)
-            it.putExtra(SampleViewModel::log.name, "Log:")
         }
     }
 }

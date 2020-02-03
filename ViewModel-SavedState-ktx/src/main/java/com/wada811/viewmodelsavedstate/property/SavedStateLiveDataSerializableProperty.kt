@@ -15,10 +15,9 @@ internal class SavedStateLiveDataSerializableProperty<T, R>(
     private var savedStateLiveData: MutableLiveData<R>? = null
 
     override fun getValue(thisRef: SavedStateHandler, property: KProperty<*>): MutableLiveData<R> {
-        if (savedStateLiveData == null) {
-            savedStateLiveData = SavedStateSerializableLiveData(savedStateHandle, property.name, deserialize, serialize)
+        return savedStateLiveData ?: SavedStateSerializableLiveData(savedStateHandle, property.name, deserialize, serialize).also {
+            savedStateLiveData = it
         }
-        return savedStateLiveData!!
     }
 
     @Suppress("UNCHECKED_CAST")
