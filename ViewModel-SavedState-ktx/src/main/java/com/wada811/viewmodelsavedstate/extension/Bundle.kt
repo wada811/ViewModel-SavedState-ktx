@@ -5,7 +5,6 @@ import android.os.Parcelable
 import java.io.Serializable
 import kotlin.reflect.KProperty
 
-fun <T : Enum<T>> Bundle.putEnum(property: KProperty<*>, enum: T) = this.putInt(property.name, enum.toInt())
 fun Bundle.putBoolean(property: KProperty<*>, value: Boolean) = this.putBoolean(property.name, value)
 fun Bundle.putBooleanArray(property: KProperty<*>, value: BooleanArray) = this.putBooleanArray(property.name, value)
 fun Bundle.putDouble(property: KProperty<*>, value: Double) = this.putDouble(property.name, value)

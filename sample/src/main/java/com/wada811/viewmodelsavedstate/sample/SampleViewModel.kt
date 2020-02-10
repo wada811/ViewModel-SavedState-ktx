@@ -1,13 +1,14 @@
 package com.wada811.viewmodelsavedstate.sample
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.wada811.viewmodelsavedstate.SavedStateAndroidViewModel
+import androidx.lifecycle.ViewModel
+import com.wada811.viewmodelsavedstate.SavedStateAdapter
+import com.wada811.viewmodelsavedstate.liveData
 
-class SampleViewModel(application: Application, savedStateHandle: SavedStateHandle) : SavedStateAndroidViewModel(application, savedStateHandle) {
+class SampleViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     enum class CountUpValue(val count: Int) {
         ONE(1),
         TEN(10)
@@ -19,7 +20,10 @@ class SampleViewModel(application: Application, savedStateHandle: SavedStateHand
             liveData.value = "$count"
         }
     }
-    val countUpValueEnumLiveData: MutableLiveData<CountUpValue?> by savedStateHandle.liveData()
+    val countUpValueEnumLiveData: MutableLiveData<CountUpValue?> by savedStateHandle.liveData(object : SavedStateAdapter<CountUpValue?, Int?> {
+        override fun toSavedState(value: CountUpValue?): Int? = value?.ordinal
+        override fun fromSavedState(state: Int?): CountUpValue? = CountUpValue.values().firstOrNull { it.ordinal == state }
+    })
     val savedStateCount: MutableLiveData<Int> by savedStateHandle.liveData()
     var savedStateCountText: LiveData<String> = MediatorLiveData<String>().also { liveData ->
         liveData.addSource(savedStateCount) { count ->

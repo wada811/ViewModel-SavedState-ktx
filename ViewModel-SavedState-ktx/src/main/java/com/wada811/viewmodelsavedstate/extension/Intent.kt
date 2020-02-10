@@ -6,7 +6,6 @@ import android.os.Parcelable
 import java.io.Serializable
 import kotlin.reflect.KProperty
 
-fun <T : Enum<T>> Intent.putExtra(property: KProperty<*>, enum: T) = this.putExtra(property.name, enum.toInt())
 fun Intent.putExtra(property: KProperty<*>, value: Boolean) = this.putExtra(property.name, value)
 fun Intent.putExtra(property: KProperty<*>, value: BooleanArray) = this.putExtra(property.name, value)
 fun Intent.putExtra(property: KProperty<*>, value: Double) = this.putExtra(property.name, value)
