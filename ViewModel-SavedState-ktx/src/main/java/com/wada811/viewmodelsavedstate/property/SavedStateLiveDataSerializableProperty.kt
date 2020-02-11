@@ -3,48 +3,47 @@ package com.wada811.viewmodelsavedstate.property
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
-import com.wada811.viewmodelsavedstate.SavedStateHandler
+import androidx.lifecycle.ViewModel
+import com.wada811.viewmodelsavedstate.SavedStateAdapter
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-internal class SavedStateLiveDataSerializableProperty<T, R>(
+internal class SavedStateLiveDataSerializableProperty<TValue, TState>(
     private val savedStateHandle: SavedStateHandle,
-    private val deserialize: (T) -> R,
-    private val serialize: (R) -> T
-) : ReadOnlyProperty<SavedStateHandler, MutableLiveData<R>> {
-    private var savedStateLiveData: MutableLiveData<R>? = null
+    private val adapter: SavedStateAdapter<TValue, TState>
+) : ReadOnlyProperty<ViewModel, MutableLiveData<TValue>> {
+    private var savedStateLiveData: MutableLiveData<TValue>? = null
 
-    override fun getValue(thisRef: SavedStateHandler, property: KProperty<*>): MutableLiveData<R> {
-        return savedStateLiveData ?: SavedStateSerializableLiveData(savedStateHandle, property.name, deserialize, serialize).also {
+    override fun getValue(thisRef: ViewModel, property: KProperty<*>): MutableLiveData<TValue> {
+        return savedStateLiveData ?: SavedStateSerializableLiveData(savedStateHandle, property.name, adapter).also {
             savedStateLiveData = it
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    private class SavedStateSerializableLiveData<T, R>(
+    private class SavedStateSerializableLiveData<TValue, TState>(
         savedStateHandle: SavedStateHandle,
         key: String,
-        private val deserialize: (T) -> R,
-        private val serialize: (R) -> T
-    ) : MediatorLiveData<R>() {
-        private val liveData: MutableLiveData<T> = savedStateHandle.getLiveData<T>(key)
+        private val adapter: SavedStateAdapter<TValue, TState>
+    ) : MediatorLiveData<TValue>() {
+        private val liveData: MutableLiveData<TState> = savedStateHandle.getLiveData<TState>(key)
 
         init {
-            value = deserialize(liveData.value as T)
+            value = adapter.fromSavedState(liveData.value as TState)
             addSource(liveData) {
-                value = deserialize(it as T)
+                value = adapter.fromSavedState(it as TState)
             }
         }
 
-        override fun getValue(): R {
-            return deserialize(liveData.value as T)
+        override fun getValue(): TValue {
+            return adapter.fromSavedState(liveData.value as TState)
         }
 
-        override fun setValue(value: R) {
+        override fun setValue(value: TValue) {
             super.setValue(value)
-            val serializedValue = serialize(value)
-            if (liveData.value != serializedValue) {
-                liveData.value = serializedValue
+            val stateValue = adapter.toSavedState(value)
+            if (liveData.value != stateValue) {
+                liveData.value = stateValue
             }
         }
     }
