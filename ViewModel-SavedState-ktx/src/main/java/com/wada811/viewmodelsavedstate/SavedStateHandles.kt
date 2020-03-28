@@ -21,6 +21,7 @@ fun <T> SavedStateHandle.property(): ReadWriteProperty<ViewModel, T> {
 fun <T> SavedStateHandle.property(initialValue: T): ReadWritePropertyProvider<ViewModel, T> {
     return provideReadWriteProperty {
         this[it] = initialValue
+        @Suppress("RemoveExplicitTypeArguments")
         property<T>()
     }
 }
@@ -43,6 +44,7 @@ fun <T> SavedStateHandle.liveData(): ReadOnlyProperty<ViewModel, MutableLiveData
 fun <T> SavedStateHandle.liveData(initialValue: T): ReadOnlyPropertyProvider<ViewModel, MutableLiveData<T>> {
     return provideReadOnlyProperty {
         this[it] = initialValue
+        @Suppress("RemoveExplicitTypeArguments")
         liveData<T>()
     }
 }
