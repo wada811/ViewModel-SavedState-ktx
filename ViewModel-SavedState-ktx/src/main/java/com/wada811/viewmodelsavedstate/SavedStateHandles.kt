@@ -18,9 +18,12 @@ fun <T> SavedStateHandle.property(): ReadWriteProperty<ViewModel, T> {
     return SavedStateProperty(this)
 }
 
-fun <T> SavedStateHandle.property(initialValue: T): ReadWritePropertyProvider<ViewModel, T> {
+fun <T> SavedStateHandle.property(defaultValue: T): ReadWritePropertyProvider<ViewModel, T> {
     return provideReadWriteProperty {
-        this[it] = initialValue
+        if (!this.contains(it)) {
+            this[it] = defaultValue
+        }
+        @Suppress("RemoveExplicitTypeArguments")
         property<T>()
     }
 }
@@ -29,9 +32,11 @@ fun <TValue, TState> SavedStateHandle.property(adapter: SavedStateAdapter<TValue
     return SavedStateSerializableProperty(this, adapter)
 }
 
-fun <TValue, TState> SavedStateHandle.property(adapter: SavedStateAdapter<TValue, TState>, initialValue: TValue): ReadWritePropertyProvider<ViewModel, TValue> {
+fun <TValue, TState> SavedStateHandle.property(adapter: SavedStateAdapter<TValue, TState>, defaultValue: TValue): ReadWritePropertyProvider<ViewModel, TValue> {
     return provideReadWriteProperty {
-        this[it] = initialValue
+        if (!this.contains(it)) {
+            this[it] = defaultValue
+        }
         property(adapter)
     }
 }
@@ -40,9 +45,12 @@ fun <T> SavedStateHandle.liveData(): ReadOnlyProperty<ViewModel, MutableLiveData
     return SavedStateLiveDataProperty(this)
 }
 
-fun <T> SavedStateHandle.liveData(initialValue: T): ReadOnlyPropertyProvider<ViewModel, MutableLiveData<T>> {
+fun <T> SavedStateHandle.liveData(defaultValue: T): ReadOnlyPropertyProvider<ViewModel, MutableLiveData<T>> {
     return provideReadOnlyProperty {
-        this[it] = initialValue
+        if (!this.contains(it)) {
+            this[it] = defaultValue
+        }
+        @Suppress("RemoveExplicitTypeArguments")
         liveData<T>()
     }
 }
@@ -51,9 +59,11 @@ fun <TValue, TState> SavedStateHandle.liveData(adapter: SavedStateAdapter<TValue
     return SavedStateLiveDataSerializableProperty(this, adapter)
 }
 
-fun <TValue, TState> SavedStateHandle.liveData(adapter: SavedStateAdapter<TValue, TState>, initialValue: TValue): ReadOnlyPropertyProvider<ViewModel, MutableLiveData<TValue>> {
+fun <TValue, TState> SavedStateHandle.liveData(adapter: SavedStateAdapter<TValue, TState>, defaultValue: TValue): ReadOnlyPropertyProvider<ViewModel, MutableLiveData<TValue>> {
     return provideReadOnlyProperty {
-        this[it] = initialValue
+        if (!this.contains(it)) {
+            this[it] = defaultValue
+        }
         liveData(adapter)
     }
 }

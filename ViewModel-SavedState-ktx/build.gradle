@@ -12,6 +12,6 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
-    api 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.3.0-alpha01'
+    api 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0-alpha01'
 }

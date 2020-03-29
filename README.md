@@ -67,7 +67,7 @@ You can get a value or a LiveData instance by delegated property using SavedStat
 ```kotlin
 class SampleViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     val text: String by savedStateHandle.property()
-    val count: MutableLiveData<Int> by savedStateHandle.liveData(initialValue = 0)
+    val count: MutableLiveData<Int> by savedStateHandle.liveData(defaultValue = 0)
     val timeUnit: MutableLiveData<TimeUnit?> by savedStateHandle.liveData(object : SavedStateAdapter<TimeUnit?, Int?> {
         override fun toSavedState(value: TimeUnit?): Int? = value?.ordinal
         override fun fromSavedState(state: Int?): TimeUnit? = state?.let { TimeUnit.values()[it] }

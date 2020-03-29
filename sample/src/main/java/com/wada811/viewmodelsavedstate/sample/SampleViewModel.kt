@@ -24,7 +24,7 @@ class SampleViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
         override fun toSavedState(value: CountUpValue?): Int? = value?.ordinal
         override fun fromSavedState(state: Int?): CountUpValue? = CountUpValue.values().firstOrNull { it.ordinal == state }
     })
-    val savedStateCount: MutableLiveData<Int> by savedStateHandle.liveData()
+    val savedStateCount: MutableLiveData<Int> by savedStateHandle.liveData(0)
     var savedStateCountText: LiveData<String> = MediatorLiveData<String>().also { liveData ->
         liveData.addSource(savedStateCount) { count ->
             liveData.value = "$count"
