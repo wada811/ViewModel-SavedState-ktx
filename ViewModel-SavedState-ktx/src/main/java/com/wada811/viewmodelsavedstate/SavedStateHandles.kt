@@ -35,7 +35,7 @@ fun <TValue, TState> SavedStateHandle.property(adapter: SavedStateAdapter<TValue
 fun <TValue, TState> SavedStateHandle.property(adapter: SavedStateAdapter<TValue, TState>, defaultValue: TValue): ReadWritePropertyProvider<ViewModel, TValue> {
     return provideReadWriteProperty {
         if (!this.contains(it)) {
-            this[it] = defaultValue
+            this[it] = adapter.toSavedState(defaultValue)
         }
         property(adapter)
     }
