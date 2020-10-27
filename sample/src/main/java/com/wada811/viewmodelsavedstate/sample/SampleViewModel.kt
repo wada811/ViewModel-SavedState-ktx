@@ -7,6 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.wada811.viewmodelsavedstate.SavedStateAdapter
 import com.wada811.viewmodelsavedstate.liveData
+import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue.ONE
 
 class SampleViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     enum class CountUpValue(val count: Int) {
@@ -23,7 +24,7 @@ class SampleViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     val countUpValueEnumLiveData: MutableLiveData<CountUpValue?> by savedStateHandle.liveData(object : SavedStateAdapter<CountUpValue?, Int?> {
         override fun toSavedState(value: CountUpValue?): Int? = value?.ordinal
         override fun fromSavedState(state: Int?): CountUpValue? = CountUpValue.values().firstOrNull { it.ordinal == state }
-    })
+    }, ONE)
     val savedStateCount: MutableLiveData<Int> by savedStateHandle.liveData(0)
     var savedStateCountText: LiveData<String> = MediatorLiveData<String>().also { liveData ->
         liveData.addSource(savedStateCount) { count ->
@@ -43,12 +44,7 @@ class SampleViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     }
 
     fun appendLog(text: String) {
-        val maxLineCount = 5
-        val logLines = log.value!!.split("\n")
-        if (logLines.size > maxLineCount) {
-            log.value = logLines.subList(logLines.size - maxLineCount + 1, logLines.size).joinToString("\n")
-        }
-        log.value = log.value + "\n$text"
+        log.value = log.value!!.lines().toMutableList().also { it.add(text) }.takeLast(10).joinToString("\n")
     }
 
     override fun onCleared() {

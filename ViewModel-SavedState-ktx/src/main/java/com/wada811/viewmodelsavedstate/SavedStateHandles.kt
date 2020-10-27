@@ -62,7 +62,7 @@ fun <TValue, TState> SavedStateHandle.liveData(adapter: SavedStateAdapter<TValue
 fun <TValue, TState> SavedStateHandle.liveData(adapter: SavedStateAdapter<TValue, TState>, defaultValue: TValue): ReadOnlyPropertyProvider<ViewModel, MutableLiveData<TValue>> {
     return provideReadOnlyProperty {
         if (!this.contains(it)) {
-            this[it] = defaultValue
+            this[it] = adapter.toSavedState(defaultValue)
         }
         liveData(adapter)
     }
