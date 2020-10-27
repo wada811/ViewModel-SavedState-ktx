@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.wada811.databinding.dataBinding
 import com.wada811.viewmodelsavedstate.extension.putExtra
 import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue
+import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue.ONE
+import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue.TEN
 import com.wada811.viewmodelsavedstate.sample.databinding.SampleActivityBinding
 
 class SampleActivity : AppCompatActivity(R.layout.sample_activity) {
@@ -27,6 +29,11 @@ class SampleActivity : AppCompatActivity(R.layout.sample_activity) {
             count += viewModel.countUpValueEnumLiveData.value?.count ?: 0
             binding.activityCountText.text = "$count"
             viewModel.countUp()
+        }
+        when (viewModel.countUpValueEnumLiveData.value) {
+            ONE -> binding.plusOneButton.isChecked = true
+            TEN -> binding.plusTenButton.isChecked = true
+            null -> Unit
         }
         binding.plusOneButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
