@@ -26,7 +26,7 @@ internal class SavedStateLiveDataSerializableProperty<TValue, TState>(
         key: String,
         private val adapter: SavedStateAdapter<TValue, TState>
     ) : MediatorLiveData<TValue>() {
-        private val liveData: MutableLiveData<TState> = savedStateHandle.getLiveData<TState>(key)
+        private val liveData: MutableLiveData<TState> = savedStateHandle.getLiveData(key)
 
         init {
             value = adapter.fromSavedState(liveData.value as TState)
