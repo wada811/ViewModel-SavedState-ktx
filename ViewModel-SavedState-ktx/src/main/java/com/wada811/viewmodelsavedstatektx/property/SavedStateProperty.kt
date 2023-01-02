@@ -1,4 +1,4 @@
-package com.wada811.viewmodelsavedstate.property
+package com.wada811.viewmodelsavedstatektx.property
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -14,6 +14,6 @@ internal class SavedStateProperty<T>(
     }
 
     override operator fun setValue(thisRef: ViewModel, property: KProperty<*>, value: T) {
-        savedStateHandle.set(property.name, value)
+        savedStateHandle[property.name] = value
     }
 }

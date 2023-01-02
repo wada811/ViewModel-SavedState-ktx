@@ -1,10 +1,10 @@
-package com.wada811.viewmodelsavedstate.property
+package com.wada811.viewmodelsavedstatektx.property
 
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.wada811.viewmodelsavedstate.SavedStateAdapter
+import com.wada811.viewmodelsavedstatektx.SavedStateAdapter
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -43,7 +43,8 @@ internal class SavedStateLiveDataSerializableProperty<TValue, TState>(
             super.setValue(value)
             val stateValue = adapter.toSavedState(value)
             if (liveData.value != stateValue) {
-                liveData.value = stateValue
+                @Suppress("USELESS_CAST")
+                liveData.value = stateValue as TState
             }
         }
     }

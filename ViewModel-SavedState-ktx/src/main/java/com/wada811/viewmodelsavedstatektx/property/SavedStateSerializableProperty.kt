@@ -1,8 +1,8 @@
-package com.wada811.viewmodelsavedstate.property
+package com.wada811.viewmodelsavedstatektx.property
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.wada811.viewmodelsavedstate.SavedStateAdapter
+import com.wada811.viewmodelsavedstatektx.SavedStateAdapter
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
@@ -16,6 +16,6 @@ internal class SavedStateSerializableProperty<TValue, TState>(
     }
 
     override operator fun setValue(thisRef: ViewModel, property: KProperty<*>, value: TValue) {
-        savedStateHandle.set(property.name, adapter.toSavedState(value))
+        savedStateHandle[property.name] = adapter.toSavedState(value)
     }
 }

@@ -1,15 +1,21 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+plugins {
+    id 'com.android.library'
+    id 'com.diffplug.spotless'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: "${rootDir}/publish-module.gradle"
 
 android {
-    compileSdkVersion 30
+    namespace "com.wada811.viewmodelsavedstatektx"
+    compileSdkVersion 33
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 21
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0"
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1'
 }

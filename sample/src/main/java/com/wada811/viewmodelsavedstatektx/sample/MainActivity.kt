@@ -1,4 +1,4 @@
-package com.wada811.viewmodelsavedstate.sample
+package com.wada811.viewmodelsavedstatektx.sample
 
 import android.content.Context
 import android.content.Intent

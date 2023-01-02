@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.wada811.viewmodelsavedstate.sample.SampleViewModel" />
+            type="com.wada811.viewmodelsavedstatektx.sample.SampleViewModel" />
     </data>
 
     <ScrollView

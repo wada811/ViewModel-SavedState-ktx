@@ -1,4 +1,4 @@
-package com.wada811.viewmodelsavedstate
+package com.wada811.viewmodelsavedstatektx
 
 interface SavedStateAdapter<TValue, TState> {
     fun toSavedState(value: TValue): TState

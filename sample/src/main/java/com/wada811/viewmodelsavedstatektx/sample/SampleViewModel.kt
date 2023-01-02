@@ -1,13 +1,13 @@
-package com.wada811.viewmodelsavedstate.sample
+package com.wada811.viewmodelsavedstatektx.sample
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.wada811.viewmodelsavedstate.SavedStateAdapter
-import com.wada811.viewmodelsavedstate.liveData
-import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue.ONE
+import com.wada811.viewmodelsavedstatektx.SavedStateAdapter
+import com.wada811.viewmodelsavedstatektx.liveData
+import com.wada811.viewmodelsavedstatektx.sample.SampleViewModel.CountUpValue.ONE
 
 class SampleViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     enum class CountUpValue(val count: Int) {

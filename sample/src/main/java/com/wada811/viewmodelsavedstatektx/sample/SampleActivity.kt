@@ -1,4 +1,4 @@
-package com.wada811.viewmodelsavedstate.sample
+package com.wada811.viewmodelsavedstatektx.sample
 
 import android.content.Context
 import android.content.Intent
@@ -9,11 +9,11 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.wada811.databinding.dataBinding
-import com.wada811.viewmodelsavedstate.extension.putExtra
-import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue
-import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue.ONE
-import com.wada811.viewmodelsavedstate.sample.SampleViewModel.CountUpValue.TEN
-import com.wada811.viewmodelsavedstate.sample.databinding.SampleActivityBinding
+import com.wada811.viewmodelsavedstatektx.extension.putExtra
+import com.wada811.viewmodelsavedstatektx.sample.SampleViewModel.CountUpValue
+import com.wada811.viewmodelsavedstatektx.sample.SampleViewModel.CountUpValue.ONE
+import com.wada811.viewmodelsavedstatektx.sample.SampleViewModel.CountUpValue.TEN
+import com.wada811.viewmodelsavedstatektx.sample.databinding.SampleActivityBinding
 
 class SampleActivity : AppCompatActivity(R.layout.sample_activity) {
     private val binding: SampleActivityBinding by dataBinding()

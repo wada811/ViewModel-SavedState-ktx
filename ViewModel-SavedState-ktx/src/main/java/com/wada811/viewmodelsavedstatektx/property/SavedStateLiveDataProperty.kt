@@ -1,4 +1,4 @@
-package com.wada811.viewmodelsavedstate.property
+package com.wada811.viewmodelsavedstatektx.property
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle

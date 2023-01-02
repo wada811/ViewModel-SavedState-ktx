@@ -1,12 +1,12 @@
-package com.wada811.viewmodelsavedstate
+package com.wada811.viewmodelsavedstatektx
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.wada811.viewmodelsavedstate.property.SavedStateLiveDataProperty
-import com.wada811.viewmodelsavedstate.property.SavedStateLiveDataSerializableProperty
-import com.wada811.viewmodelsavedstate.property.SavedStateProperty
-import com.wada811.viewmodelsavedstate.property.SavedStateSerializableProperty
+import com.wada811.viewmodelsavedstatektx.property.SavedStateLiveDataProperty
+import com.wada811.viewmodelsavedstatektx.property.SavedStateLiveDataSerializableProperty
+import com.wada811.viewmodelsavedstatektx.property.SavedStateProperty
+import com.wada811.viewmodelsavedstatektx.property.SavedStateSerializableProperty
 import kotlin.properties.PropertyDelegateProvider
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
