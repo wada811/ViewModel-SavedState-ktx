@@ -95,6 +95,24 @@ dependencies {
 }
 ```
 
+## Migrations
+
+### 3.0.0
+
+#### dependencies
+
+```diff
+-    implementation 'com.github.wada811:ViewModel-SavedState-ktx:x.y.z'
++    implementation 'com.wada811.viewmodelsavedstatektx:viewmodelsavedstatektx:x.y.z'
+```
+
+#### package
+
+```diff
+-import com.wada811.viewmodelsavedstate
++import com.wada811.viewmodelsavedstatektx
+```
+
 ## License
 
 Copyright (C) 2019 wada811
