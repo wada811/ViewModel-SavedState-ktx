@@ -36,5 +36,5 @@ dependencies {
     implementation project(':ViewModel-SavedState-ktx')
     implementation 'com.wada811.databindingktx:databindingktx:7.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
 }
